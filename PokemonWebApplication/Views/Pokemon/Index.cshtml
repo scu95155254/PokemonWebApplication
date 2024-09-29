@@ -1,0 +1,69 @@
+﻿@model PokemonWebApplication.Models.Pokemon.PokemonIndexViewModel
+
+@{
+    ViewBag.Title = "寶可夢查詢";
+}
+
+<h2>寶可夢查詢</h2>
+<!-- 添加圖片作為裝飾 -->
+<div class="header-image">
+    <img src="~/images/pokemon-logo.png" alt="寶可夢Logo" class="img-fluid" />
+</div>
+
+<!-- 查詢表單 -->
+<form method="post" class="row g-3">
+    <div class="col-md-3">
+        <label for="Name" class="form-label">寶可夢名稱</label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" placeholder="輸入寶可夢名稱" />
+    </div>
+
+    <div class="col-md-3">
+        <label for="Type" class="form-label">屬性</label>
+        <input type="text" class="form-control" id="Type" name="Type" value="@Model.Type" placeholder="輸入屬性" />
+    </div>
+    <div class="col-md-3">
+        <label for="EvolutionStage" class="form-label">進化型態</label>
+        <select class="form-select" id="EvolutionStage" name="EvolutionStage">
+            <option value="">--選擇進化型態--</option>
+            <option value="基礎" selected="@(Model.EvolutionStage == "基礎")">基礎</option>
+            <option value="1階進化" selected="@(Model.EvolutionStage == "1階進化")">1階進化</option>
+            <option value="2階進化" selected="@(Model.EvolutionStage == "2階進化")">2階進化</option>
+
+        </select>
+    </div>
+
+    <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">查詢</button>
+    </div>
+</form>
+
+<hr />
+
+<!-- 查詢結果 -->
+@if (@Model.SearchResults != null && Model.SearchResults.Any())
+{
+    <h3>查詢結果</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>寶可夢名稱</th>
+                <th>屬性</th>
+                <th>進化型態</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pokemon in Model.SearchResults)
+            {
+                <tr>
+                    <td>@pokemon.Name</td>
+                    <td>@pokemon.Type</td>
+                    <td>@pokemon.EvolutionStage</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model.SearchResults != null)
+{
+    <p>沒有符合條件的寶可夢。</p>
+}

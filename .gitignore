@@ -2,8 +2,7 @@
 # 這個 .gitignore 檔案由 Microsoft(R) Visual Studio 自動建立。
 ################################################################################
 
-/PokemonWebApplication/obj
-/.vs
-/PokemonWebApplication/.vs/PokemonWebApplication/FileContentIndex
-/PokemonWebApplication/.vs/PokemonWebApplication
-/PokemonWebApplication/bin/Debug/net8.0
+/PokemonWebApplication/obj/
+/PokemonWebApplication/bin/
+/PokemonWebApplication/.vs/
+/.vs/
