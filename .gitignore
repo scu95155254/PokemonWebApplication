@@ -2,7 +2,11 @@
 # 這個 .gitignore 檔案由 Microsoft(R) Visual Studio 自動建立。
 ################################################################################
 
+/.vs/
+*.csproj.user
 /PokemonWebApplication/obj/
 /PokemonWebApplication/bin/
 /PokemonWebApplication/.vs/
-/.vs/
+/PokemonWebAPI/obj/
+/PokemonWebAPI/bin/
+/PokemonWebAPI/.vs/
