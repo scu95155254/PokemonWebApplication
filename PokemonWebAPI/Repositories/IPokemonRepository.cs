@@ -1,8 +1,8 @@
 ﻿using PokemonWebAPI.Entities;
 
-namespace PokemonWebAPI.Services
+namespace PokemonWebAPI.Repositories
 {
-    public interface IPokemonService
+    public interface IPokemonRepository
     {
         Task<List<Pokemon>> GetPokemonsAsync();
     }

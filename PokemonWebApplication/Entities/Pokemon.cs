@@ -1,4 +1,4 @@
-﻿namespace PokemonWebAPI.Entity
+﻿namespace PokemonWebApplication.Entities
 {
     public class Pokemon
     {
@@ -7,6 +7,6 @@
         public string Type { get; set; }
         public string Ability { get; set; }
         public string EvolutionStage { get; set; }
-        public string area { get; set; }
+        public string Location { get; set; }
     }
 }

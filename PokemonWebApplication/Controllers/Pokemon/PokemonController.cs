@@ -1,36 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using PokemonWebApplication.Models.Pokemon;
+using PokemonWebApplication.Queries;
 
 namespace PokemonWebApplication.Controllers.Pokemon
 {
     public class PokemonController : Controller
     {
-        // 模擬寶可夢資料庫 (實際情況中你可能會查詢資料庫)
-        private static List<Models.Pokemon.Pokemon> pokemons = new List<Models.Pokemon.Pokemon>
-        {
-        new Models.Pokemon.Pokemon { Name = "Pikachu", Type = "Electric", EvolutionStage = "基礎" },
-        new Models.Pokemon.Pokemon { Name = "Charizard", Type = "Fire", EvolutionStage = "2階進化" },
-        new Models.Pokemon.Pokemon { Name = "Bulbasaur", Type = "Grass", EvolutionStage = "基礎" },
-        // 加入更多寶可夢資料...
-    };
+        private readonly IMediator _mediator;
 
-        public IActionResult Index()
+        public PokemonController(IMediator mediator)
+        {
+            _mediator = mediator; // 注入 MediatR 的 IMediator
+        }
+
+        public async Task<IActionResult> Index()
         {
             var viewModel = new PokemonIndexViewModel();
+
+            // 創建查詢物件
+            var query = new GetPokemonsQuery(viewModel); // 如果有參數，可以在這裡設置
+
+            var pokemons = await _mediator.Send(query); // 使用 MediatR 發送查詢
             return View(viewModel);
         }
 
         [HttpPost]
         public ActionResult Index(PokemonIndexViewModel model)
         {
-            // 查詢邏輯
-            var results = pokemons.Where(p =>
-                (string.IsNullOrEmpty(model.Name) || p.Name.Contains(model.Name)) &&
-                (string.IsNullOrEmpty(model.Type) || p.Type.Contains(model.Type)) &&
-                (string.IsNullOrEmpty(model.EvolutionStage) || p.EvolutionStage == model.EvolutionStage)
-            ).ToList();
 
-            model.SearchResults = results;
             return View(model);
         }
     }

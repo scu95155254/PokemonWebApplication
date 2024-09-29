@@ -1,5 +1,5 @@
 
-using PokemonWebAPI.Repositorys;
+using PokemonWebAPI.Repositories;
 using PokemonWebAPI.Services;
 
 namespace PokemonWebAPI

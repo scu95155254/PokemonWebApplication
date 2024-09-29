@@ -1,12 +1,20 @@
-﻿using PokemonWebAPI.Entity;
+﻿using PokemonWebAPI.Entities;
+using PokemonWebAPI.Repositories;
 
 namespace PokemonWebAPI.Services
 {
     public class PokemonService : IPokemonService
     {
-        public Task<Pokemon> GetPokemonByIdAsync(int id)
+        private readonly IPokemonRepository _pokemonRepository;
+
+        public PokemonService(IPokemonRepository pokemonRepository)
         {
-            throw new NotImplementedException();
+            _pokemonRepository = pokemonRepository;
+        }   
+
+        public Task<List<Pokemon>> GetPokemonsAsync()
+        {
+            return _pokemonRepository.GetPokemonsAsync();
         }
     }
 }

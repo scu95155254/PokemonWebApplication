@@ -1,3 +1,5 @@
+using PokemonWebApplication.Repositories;
+
 namespace PokemonWebApplication
 {
     public class Program
@@ -8,7 +10,11 @@ namespace PokemonWebApplication
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
+            // 註冊 MediatR，使用具體的處理器類型
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+            // 註冊 HttpClient
+            builder.Services.AddHttpClient<IPokemonRepository, PokemonRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

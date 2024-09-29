@@ -14,15 +14,12 @@ namespace PokemonWebAPI.Controllers.Pokemon
             _pokemonService = pokemonService;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetPokemon(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetPokemon()
         {
-            var pokemon = await _pokemonService.GetPokemonByIdAsync(id);
-            if (pokemon == null)
-                return NotFound();
+            var pokemons = await _pokemonService.GetPokemonsAsync();
 
-            return Ok(pokemon);
+            return Ok(pokemons);
         }
-
     }
 }
